@@ -1,0 +1,527 @@
+/* Custom styles beyond Tailwind */
+
+/* Base styles */
+:root {
+  --primary-gradient: linear-gradient(135deg, #6366f1, #a855f7);
+  --secondary-gradient: linear-gradient(135deg, #a855f7, #6366f1);
+  --primary-shadow: 0 10px 15px -3px rgba(99, 102, 241, 0.15), 0 4px 6px -2px rgba(99, 102, 241, 0.1);
+  --primary-glow: 0 0 15px rgba(99, 102, 241, 0.6);
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Apply dark mode when the 'dark' class is on the HTML element */
+.dark {
+  color-scheme: dark;
+}
+
+/* Floating animated orbs in background */
+.glowing-orb {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 40%, rgba(99, 102, 241, 0.15), rgba(167, 139, 250, 0.12), rgba(139, 92, 246, 0.06), transparent 70%);
+  top: -100px;
+  right: -100px;
+  filter: blur(30px);
+  animation: floatingOrb 20s infinite ease-in-out;
+  z-index: 0;
+}
+
+.glowing-orb.secondary {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle at 40% 30%, rgba(139, 92, 246, 0.15), rgba(99, 102, 241, 0.12), rgba(167, 139, 250, 0.06), transparent 70%);
+  bottom: -100px;
+  left: -100px;
+  top: auto;
+  right: auto;
+  animation: floatingOrb2 25s infinite ease-in-out;
+}
+
+@keyframes floatingOrb {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.6;
+  }
+  25% {
+    transform: translate(50px, 30px) scale(1.1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: translate(20px, 60px) scale(0.9);
+    opacity: 0.7;
+  }
+  75% {
+    transform: translate(-30px, 40px) scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+@keyframes floatingOrb2 {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.7;
+  }
+  33% {
+    transform: translate(40px, -30px) scale(1.1);
+    opacity: 0.8;
+  }
+  66% {
+    transform: translate(-20px, -40px) scale(0.95);
+    opacity: 0.6;
+  }
+}
+
+/* Title animation */
+.title-container {
+  position: relative;
+  display: inline-block;
+}
+
+.title-container:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  bottom: -8px;
+  left: 0;
+  background: var(--primary-gradient);
+  border-radius: 3px;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  transition: transform 0.3s ease-out;
+}
+
+.title-container:hover:after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+/* Fancy button styles */
+.fancy-button {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: var(--primary-shadow);
+}
+
+.fancy-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+  z-index: -1;
+}
+
+.fancy-button:hover::before {
+  transform: translateX(0);
+}
+
+/* Theme toggle button enhancement */
+.theme-toggle-btn {
+  transition: all 0.3s ease;
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.theme-toggle-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Game Mode Styles */
+input[type="radio"] {
+  accent-color: #6366f1;
+}
+
+input[type="range"] {
+  -webkit-appearance: none;
+  height: 5px;
+  border-radius: 5px;
+  background: #d1d5db;
+  outline: none;
+}
+
+.dark input[type="range"] {
+  background: #4b5563;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(to right, #6366f1, #8b5cf6);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
+}
+
+/* Progress bar pulse animation */
+@keyframes progressPulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+#progress-bar {
+  transition: width 0.5s ease-in-out;
+}
+
+/* Timer styles */
+#timer-display {
+  transition: all 0.3s ease;
+}
+
+#timer-countdown {
+  transition: color 0.3s ease;
+}
+
+#timer-display.warning #timer-countdown {
+  color: #f59e0b;
+}
+
+#timer-display.danger #timer-countdown {
+  color: #ef4444;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* Swipe area styling */
+#swipe-area {
+  touch-action: pan-y;
+  position: relative;
+  overflow: hidden;
+}
+
+#swipe-indicator {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+#swipe-indicator:hover {
+  opacity: 1;
+}
+
+/* Mode indicator animation */
+#mode-indicator {
+  position: relative;
+}
+
+#mode-indicator::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: var(--primary-gradient);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+#mode-indicator:hover::after {
+  transform: scaleX(1);
+}
+
+/* Enhanced animations for question appearance */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+#questionResult:not(.hidden) {
+  animation: fadeIn 0.4s ease-out, scaleIn 0.5s ease-out;
+}
+
+#questionResult:not(.hidden) div {
+  position: relative;
+  overflow: hidden;
+}
+
+#questionResult:not(.hidden) div::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to right, 
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.3) 50%,
+    rgba(255,255,255,0) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+  pointer-events: none;
+}
+
+.dark #questionResult:not(.hidden) div::after {
+  background: linear-gradient(to right, 
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,0.05) 50%,
+    rgba(255,255,255,0) 100%
+  );
+}
+
+/* Animation for error message */
+#errorMessage:not(.hidden) {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Button hover effects */
+button {
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+button:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 5px;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 0;
+  border-radius: 100%;
+  transform: scale(1, 1) translate(-50%);
+  transform-origin: 50% 50%;
+}
+
+button:focus:not(:active)::after {
+  animation: ripple 1s ease-out;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0, 0);
+    opacity: 0.5;
+  }
+  20% {
+    transform: scale(25, 25);
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0;
+    transform: scale(40, 40);
+  }
+}
+
+/* Visited question indicator */
+.visited-question {
+  position: relative;
+}
+
+.visited-question::after {
+  content: "✓";
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #10b981;
+  font-weight: bold;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards 0.1s;
+}
+
+/* Smooth transition for all interactive elements */
+button, 
+input, 
+textarea {
+  transition: all 0.2s ease;
+}
+
+/* Focus styles */
+button:focus,
+input:focus,
+textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.4);
+}
+
+/* Enhanced input style */
+input[type="number"] {
+  appearance: textfield;
+}
+
+input[type="number"]::-webkit-inner-spin-button, 
+input[type="number"]::-webkit-outer-spin-button { 
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Enhance question list items */
+#questionsList div {
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  transition: all 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+#questionsList div:hover {
+  background: rgba(99, 102, 241, 0.1);
+  border-left-color: #6366f1;
+  transform: translateX(5px);
+}
+
+.dark #questionsList div:hover {
+  background: rgba(99, 102, 241, 0.2);
+}
+
+/* Custom scrollbar for the textarea */
+textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+textarea::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 8px;
+}
+
+.dark textarea::-webkit-scrollbar-track {
+  background: #374151;
+}
+
+textarea::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 8px;
+}
+
+.dark textarea::-webkit-scrollbar-thumb {
+  background: #4b5563;
+}
+
+textarea::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+
+.dark textarea::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}
+
+/* Glass-morphism effect */
+.backdrop-blur-sm {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+/* Confetti container */
+#confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 100;
+}
+
+/* Animations for page load */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+header, #setup-screen, #game-screen > div {
+  animation: fadeInUp 0.5s ease-out;
+  animation-fill-mode: backwards;
+}
+
+#setup-screen {
+  animation-delay: 0.1s;
+}
+
+#game-screen > div:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+#game-screen > div:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+#game-screen > div:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+/* Media queries for better mobile experience */
+@media (max-width: 640px) {
+  #swipe-indicator {
+    display: block !important;
+  }
+  
+  .fancy-button {
+    padding: 0.625rem 1rem;
+  }
+  
+  input[type="range"]::-webkit-slider-thumb {
+    width: 24px;
+    height: 24px;
+  }
+} 
